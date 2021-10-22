@@ -1,8 +1,8 @@
 https://github.com/99designs/gqlgen
 
 ## Stappen
-- go install github.com/99designs/gqlgen@latest
-- go mod init bitbucket.org/Seraph1nia/gographq
+- go mod init github.com/Seraph1nia/gographql
+- go get github.com/99designs/gqlgen
 - gooi schema's in schema.graphqls
 - go run github.com/99designs/gqlgen init
 - go mod tidy # dit verzorgt dependencies
