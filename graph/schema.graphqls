@@ -7,7 +7,9 @@ type Todo {
   text: String!
   done: Boolean!
   user: User!
+  nutteloos: Boolean!
 }
+
 
 type User {
   id: ID!
