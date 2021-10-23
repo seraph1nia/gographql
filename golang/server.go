@@ -7,6 +7,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/Seraph1nia/gographql/golang/data"
 	"github.com/Seraph1nia/gographql/golang/graph"
 	"github.com/Seraph1nia/gographql/golang/graph/generated"
 )
@@ -14,6 +15,10 @@ import (
 const defaultPort = "8080"
 
 func main() {
+
+	// test database connection
+	data.Trygorm()
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort

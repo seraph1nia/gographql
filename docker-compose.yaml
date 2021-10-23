@@ -4,20 +4,26 @@ version: '2'
 services:
   graphql:
     build: ./golang
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://graphql:8080/graphql?query=%7B__typename%7D" ]
+      timeout: 20s
+      interval: 10s
+      retries: 3
     env_file:
       - environment.env
     ports:
      - "8080:8080"
     depends_on:
-      - "db"
+      db:
+        condition: service_healthy
 
   db:
     build: ./postgres
     healthcheck:
       test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "root" ]
-      timeout: 45s
+      timeout: 20s
       interval: 10s
-      retries: 10
+      retries: 3
     restart: always
     env_file:
       - environment.env
