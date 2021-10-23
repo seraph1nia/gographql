@@ -9,13 +9,13 @@ type User {
 }
 
 
-input User {
+input UserInput {
   username: String!
   password: String!
   email: String!
 }
 
 type Mutation {
-  signupUser(input: User!): User!
+  signupUser(input: UserInput!): User!
 }
 
