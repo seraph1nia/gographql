@@ -14,8 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
 
-func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput) (*model.User, error) {
-
+func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput) (string, error) {
 	// definieer client
 	cognitoClient := auth.Init()
 	// even een printje om cognitoClient te gebruiken
@@ -28,10 +27,8 @@ func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput
 		Username: aws.String(input.Username),
 	}
 	_, err := cognitoClient.SignUp(ctx, awsReq)
-	if err != nil {
-		panic(fmt.Errorf("not implemented"))
-	}
-	return
+
+	return "missie geslaagd", err
 }
 
 // Mutation returns generated.MutationResolver implementation.

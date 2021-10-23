@@ -1,3 +1,4 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target 'all'.  Stop.
  
 # GNU Make 4.3
@@ -7,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Oct 23 23:56:39 2021
+# Make data base, printed on Sun Oct 24 01:44:30 2021
 
 # Variables
 
@@ -22,7 +23,7 @@ USERPROFILE = C:\Users\Bart
 # environment
 LOCALAPPDATA = C:\Users\Bart\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ba3755dd-e7bb-46db-8760-0e6861338628-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-ac60a67a-54e5-4343-bfcd-bf49f8fa8431-sock
 # environment
 VSCODE_CWD = C:\Users\Bart\AppData\Local\Programs\Microsoft VS Code
 # environment
@@ -40,7 +41,7 @@ GOPATH = C:\Users\Bart\go
 # automatic
 @D = $(patsubst %/,%,$(patsubst %\,%,$(dir $@)))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_17860_MRXRFSLKLEJYYZXU
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_6948_TOVYWRGLKQVRCXSA
 # environment
 FPS_BROWSER_USER_PROFILE_STRING = Default
 # environment
@@ -96,7 +97,7 @@ MAKEFILE_LIST := makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 17860
+VSCODE_PID = 6948
 # automatic
 ?D = $(patsubst %/,%,$(patsubst %\,%,$(dir $?)))
 # automatic
@@ -214,7 +215,7 @@ PROCESSOR_IDENTIFIER = AMD64 Family 23 Model 1 Stepping 1, AuthenticAMD
 
 # Directories
 
-# . (key c:/Users/Bart/Documents/IT-projects/gographql, mtime 1635024522): 13 files, no impossibilities.
+# . (key c:/Users/Bart/Documents/IT-projects/gographql, mtime 1635026199): 13 files, no impossibilities.
 
 # 13 files, no impossibilities in 1 directories.
 
@@ -294,6 +295,6 @@ down:
 # strcache performance: lookups = 30 / hit rate = 30%
 # hash-table stats:
 # Load=21/8192=0%, Rehash=0, Collisions=0/30=0%
-# Finished Make data base on Sat Oct 23 23:56:39 2021
+# Finished Make data base on Sun Oct 24 01:44:30 2021
 
  

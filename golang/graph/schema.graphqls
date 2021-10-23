@@ -5,17 +5,18 @@
 type User {
   username: String!
   password: String!
-  email: String!
 }
 
 
 input UserInput {
   username: String!
   password: String!
-  email: String!
 }
 
 type Mutation {
   signupUser(input: UserInput!): String!
 }
 
+# mutation signupUser {
+#   signupUser(input: { username: "jemoeder", password: "sfsfdfs(Y&*Y(BG(&*GG)1" })
+# }

@@ -49,14 +49,13 @@ type ComplexityRoot struct {
 	}
 
 	User struct {
-		Email    func(childComplexity int) int
 		Password func(childComplexity int) int
 		Username func(childComplexity int) int
 	}
 }
 
 type MutationResolver interface {
-	SignupUser(ctx context.Context, input model.UserInput) (*model.User, error)
+	SignupUser(ctx context.Context, input model.UserInput) (string, error)
 }
 
 type executableSchema struct {
@@ -85,13 +84,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.SignupUser(childComplexity, args["input"].(model.UserInput)), true
-
-	case "User.email":
-		if e.complexity.User.Email == nil {
-			break
-		}
-
-		return e.complexity.User.Email(childComplexity), true
 
 	case "User.password":
 		if e.complexity.User.Password == nil {
@@ -178,18 +170,16 @@ var sources = []*ast.Source{
 type User {
   username: String!
   password: String!
-  email: String!
 }
 
 
 input UserInput {
   username: String!
   password: String!
-  email: String!
 }
 
 type Mutation {
-  signupUser(input: UserInput!): User!
+  signupUser(input: UserInput!): String!
 }
 
 `, BuiltIn: false},
@@ -305,9 +295,9 @@ func (ec *executionContext) _Mutation_signupUser(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*model.User)
+	res := resTmp.(string)
 	fc.Result = res
-	return ec.marshalNUser2ᚖgithubᚗcomᚋSeraph1niaᚋgographqlᚋgolangᚋgraphᚋmodelᚐUser(ctx, field.Selections, res)
+	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) _Query___type(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
@@ -435,41 +425,6 @@ func (ec *executionContext) _User_password(ctx context.Context, field graphql.Co
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
 		return obj.Password, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) _User_email(ctx context.Context, field graphql.CollectedField, obj *model.User) (ret graphql.Marshaler) {
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	fc := &graphql.FieldContext{
-		Object:     "User",
-		Field:      field,
-		Args:       nil,
-		IsMethod:   false,
-		IsResolver: false,
-	}
-
-	ctx = graphql.WithFieldContext(ctx, fc)
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Email, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -1633,14 +1588,6 @@ func (ec *executionContext) unmarshalInputUserInput(ctx context.Context, obj int
 			if err != nil {
 				return it, err
 			}
-		case "email":
-			var err error
-
-			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("email"))
-			it.Email, err = ec.unmarshalNString2string(ctx, v)
-			if err != nil {
-				return it, err
-			}
 		}
 	}
 
@@ -1734,11 +1681,6 @@ func (ec *executionContext) _User(ctx context.Context, sel ast.SelectionSet, obj
 			}
 		case "password":
 			out.Values[i] = ec._User_password(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				invalids++
-			}
-		case "email":
-			out.Values[i] = ec._User_email(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				invalids++
 			}
@@ -2031,20 +1973,6 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 		}
 	}
 	return res
-}
-
-func (ec *executionContext) marshalNUser2githubᚗcomᚋSeraph1niaᚋgographqlᚋgolangᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v model.User) graphql.Marshaler {
-	return ec._User(ctx, sel, &v)
-}
-
-func (ec *executionContext) marshalNUser2ᚖgithubᚗcomᚋSeraph1niaᚋgographqlᚋgolangᚋgraphᚋmodelᚐUser(ctx context.Context, sel ast.SelectionSet, v *model.User) graphql.Marshaler {
-	if v == nil {
-		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	return ec._User(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUserInput2githubᚗcomᚋSeraph1niaᚋgographqlᚋgolangᚋgraphᚋmodelᚐUserInput(ctx context.Context, v interface{}) (model.UserInput, error) {
