@@ -1,4 +1,4 @@
-module github.com/Seraph1nia/gographql
+module github.com/Seraph1nia/gographql/golang
 
 go 1.17
 

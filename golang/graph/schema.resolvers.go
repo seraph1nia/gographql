@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/Seraph1nia/gographql/graph/generated"
-	"github.com/Seraph1nia/gographql/graph/model"
+	"github.com/Seraph1nia/gographql/golang/graph/generated"
+	"github.com/Seraph1nia/gographql/golang/graph/model"
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
