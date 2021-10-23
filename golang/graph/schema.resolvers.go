@@ -7,12 +7,31 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/Seraph1nia/gographql/golang/auth"
 	"github.com/Seraph1nia/gographql/golang/graph/generated"
 	"github.com/Seraph1nia/gographql/golang/graph/model"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
 
 func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput) (*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+
+	// definieer client
+	cognitoClient := auth.Init()
+	// even een printje om cognitoClient te gebruiken
+	fmt.Println(cognitoClient.AppClientId)
+
+	// build request
+	awsReq := &cognitoidentityprovider.SignUpInput{
+		ClientId: aws.String(cognitoClient.AppClientId),
+		Password: aws.String(input.Password),
+		Username: aws.String(input.Username),
+	}
+	_, err := cognitoClient.SignUp(ctx, awsReq)
+	if err != nil {
+		panic(fmt.Errorf("not implemented"))
+	}
+	return
 }
 
 // Mutation returns generated.MutationResolver implementation.

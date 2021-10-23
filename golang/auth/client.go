@@ -18,6 +18,7 @@ type CognitoClient struct {
 	*cip.Client // pointer naar cip.Client
 }
 
+// deze functie geeft een output van type CognitoClient
 func Init() *CognitoClient {
 	cfg, err := config.LoadDefaultConfig(context.Background())
 	if err != nil {
