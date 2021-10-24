@@ -15,10 +15,10 @@ import (
 )
 
 func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput) (string, error) {
+	// TODO: add email to schema and confirmationflow, use password hashing
+
 	// definieer client
 	cognitoClient := auth.Init()
-	// even een printje om cognitoClient te gebruiken
-	fmt.Println(cognitoClient.AppClientId)
 
 	// build request
 	awsReq := &cognitoidentityprovider.SignUpInput{
@@ -38,7 +38,34 @@ func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput
 	// auto confirm all users for now
 	_, err = cognitoClient.AdminConfirmSignUp(ctx, confirmInput)
 
-	return "missie geslaagd", err
+	return "you are registered: " + input.Username, err
+}
+
+func (r *mutationResolver) LoginUser(ctx context.Context, input model.UserInput) (*model.SignInResponse, error) {
+	// definieer client
+	cognitoClient := auth.Init()
+
+	// build request
+	awsReq := &cognitoidentityprovider.AdminInitiateAuthInput{
+		ClientId:       aws.String(cognitoClient.AppClientId),
+		AuthFlow:       "ADMIN_USER_PASSWORD_AUTH",
+		UserPoolId:     aws.String(cognitoClient.UserPoolId),
+		AuthParameters: map[string]string{"USERNAME": input.Username, "PASSWORD": input.Password},
+	}
+	fmt.Println(awsReq)
+	// AdminInitiateAuthOutput komt in output, hierin zit onder andere AuthenticationResultType in. Hier zitten de tokens in: https://docs.aws.amazon.com/sdk-for-go/api/service/cognitoidentityprovider/#AuthenticationResultType
+	// hier wordt := gebruik want het is een nieuwe variabele EN er komt een waarde in. (declaration en assignment)
+	output, err := cognitoClient.AdminInitiateAuth(ctx, awsReq)
+
+	response := &model.SignInResponse{
+		AccessToken:  *output.AuthenticationResult.AccessToken,
+		ExpiresIn:    int(output.AuthenticationResult.ExpiresIn),
+		IDToken:      *output.AuthenticationResult.IdToken,
+		RefreshToken: *output.AuthenticationResult.RefreshToken,
+		TokenType:    *output.AuthenticationResult.TokenType,
+	}
+
+	return response, err
 }
 
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {

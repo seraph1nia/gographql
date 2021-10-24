@@ -20,14 +20,41 @@ type Query {
   todos: [Todo!]!
 }
 
+
 input UserInput {
   username: String!
   password: String!
 }
 
+# moet hier nog iets van ssensitive omheen?
+type SignInResponse {
+
+  AccessToken: String!
+  ExpiresIn: Int!
+  IdToken: String!
+  RefreshToken: String!
+  TokenType: String!
+}
+
+
 type Mutation {
   signupUser(input: UserInput!): String!
+  LoginUser(input: UserInput!): SignInResponse!
 }
+
+
+
+# mutation LoginUser {
+#   LoginUser(input: { username: "jemoeder4", password: "Jemoeder4!" }){
+#     AccessToken
+#     ExpiresIn
+#     TokenType
+#     IdToken
+#   }
+# }
+
+
+
 
 # mutation signupUser {
 #   signupUser(input: { username: "jemoeder", password: "sfsfdfs(Y&*Y(BG(&*GG)1" })

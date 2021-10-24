@@ -19,6 +19,8 @@ const defaultPort = "8080"
 
 func main() {
 
+	// TODO: add openidc logic for playground page and better logging
+
 	router := chi.NewRouter()
 
 	// Add CORS middleware around every request

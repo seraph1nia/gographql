@@ -2,6 +2,14 @@
 
 package model
 
+type SignInResponse struct {
+	AccessToken  string `json:"AccessToken"`
+	ExpiresIn    int    `json:"ExpiresIn"`
+	IDToken      string `json:"IdToken"`
+	RefreshToken string `json:"RefreshToken"`
+	TokenType    string `json:"TokenType"`
+}
+
 type Todo struct {
 	ID   string `json:"id"`
 	Text string `json:"text"`
