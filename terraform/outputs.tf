@@ -11,3 +11,7 @@ output "aws_cognito_account_id" {
 output "aws_cognito_client_id" {
   value = aws_cognito_user_pool_client.gographql-project-client.id
 }
+
+output "aws_user_pool_id" {
+  value = aws_cognito_user_pool.gographql-project.id
+}

@@ -5,6 +5,8 @@ go 1.17
 require (
 	github.com/99designs/gqlgen v0.14.0
 	github.com/aws/aws-sdk-go-v2 v1.10.0
+	github.com/go-chi/chi v1.5.4
+	github.com/rs/cors v1.6.0
 	github.com/vektah/gqlparser/v2 v2.2.0
 	gorm.io/driver/postgres v1.1.2
 	gorm.io/gorm v1.21.16
@@ -24,7 +26,7 @@ require (
 	github.com/agnivade/levenshtein v1.1.0 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.7.0
-	github.com/gorilla/websocket v1.4.2 // indirect
+	github.com/gorilla/websocket v1.4.2
 	github.com/hashicorp/golang-lru v0.5.0 // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.10.0 // indirect

@@ -6,20 +6,7 @@ resource "aws_iam_access_key" "cognito_admin" {
   user = aws_iam_user.cognito_admin.name
 }
 
-resource "aws_iam_user_policy" "cognito_admin" {
-  name = "cognito-admin"
-  user = aws_iam_user.cognito_admin.name
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "cognito-identity:*",
-      "Effect": "Allow",
-      "Resource": "*"
-    }
-  ]
-}
-EOF
+resource "aws_iam_user_policy_attachment" "attach_cognito_power" {
+  user       = aws_iam_user.cognito_admin.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonCognitoPowerUser"
 }

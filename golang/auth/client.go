@@ -15,6 +15,7 @@ import (
 
 type CognitoClient struct {
 	AppClientId string
+	UserPoolId  string
 	*cip.Client // pointer naar cip.Client
 }
 
@@ -27,6 +28,7 @@ func Init() *CognitoClient {
 
 	return &CognitoClient{
 		AppClientId: os.Getenv("AWS_COGNITO_CLIENT_ID"),
+		UserPoolId:  os.Getenv("AWS_USER_POOL_ID"),
 		Client:      cip.NewFromConfig(cfg),
 	}
 

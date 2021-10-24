@@ -26,12 +26,30 @@ func (r *mutationResolver) SignupUser(ctx context.Context, input model.UserInput
 		Password: aws.String(input.Password),
 		Username: aws.String(input.Username),
 	}
+	// post request
 	_, err := cognitoClient.SignUp(ctx, awsReq)
 
+	// build request
+	confirmInput := &cognitoidentityprovider.AdminConfirmSignUpInput{
+		UserPoolId: aws.String(cognitoClient.UserPoolId),
+		Username:   aws.String(input.Username),
+	}
+
+	// auto confirm all users for now
+	_, err = cognitoClient.AdminConfirmSignUp(ctx, confirmInput)
+
 	return "missie geslaagd", err
+}
+
+func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
+	panic(fmt.Errorf("not implemented"))
 }
 
 // Mutation returns generated.MutationResolver implementation.
 func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
 
+// Query returns generated.QueryResolver implementation.
+func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
+
 type mutationResolver struct{ *Resolver }
+type queryResolver struct{ *Resolver }

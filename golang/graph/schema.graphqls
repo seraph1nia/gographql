@@ -2,11 +2,23 @@
 #
 # https://gqlgen.com/getting-started/
 
-# type User {
-#   username: String!
-#   password: String!
-# }
+# voeg wel een type en een query toe, anders werkt de playground niet :S
 
+type Todo {
+  id: ID!
+  text: String!
+  done: Boolean!
+  user: User!
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  todos: [Todo!]!
+}
 
 input UserInput {
   username: String!
