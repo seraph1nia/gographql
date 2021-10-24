@@ -2,10 +2,10 @@
 #
 # https://gqlgen.com/getting-started/
 
-type User {
-  username: String!
-  password: String!
-}
+# type User {
+#   username: String!
+#   password: String!
+# }
 
 
 input UserInput {
